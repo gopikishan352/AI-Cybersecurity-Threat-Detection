@@ -12,6 +12,20 @@
 
 ---
 
+## 🚀 Live Demo
+
+**AI Cybersecurity Threat Detection System**
+
+Experience the AI-powered cybersecurity dashboard with machine learning-based threat detection, network traffic analysis, and security monitoring.
+
+🌐 **Live Application:** [Launch AI Cyber Threat Detection](https://ai-cyber-threat-detection-t8cq.onrender.com/)
+
+**Technology Stack:** Python, Flask, Machine Learning, HTML, CSS, JavaScript
+
+**Deployment Platform:** Render
+
+*Note: The free Render instance may take approximately 50 seconds or longer to wake up after inactivity.*
+
 ## 📌 1. Project Overview
 
 The **AI Cyber Threat Detection System** is an enterprise-grade, SOC (Security Operations Center) cybersecurity dashboard and machine learning classification pipeline. Designed to detect, categorize, and mitigate malicious network intrusions, the system analyzes network traffic flows using a multi-class **Random Forest Classifier** trained on the benchmark **NSL-KDD dataset** (125,973 records).
