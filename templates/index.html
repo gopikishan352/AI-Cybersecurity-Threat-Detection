@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Cyber Threat Detection System</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom SOC Cybersecurity CSS (Loaded via Flask url_for) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- =====================================================================
+     1. TOP NAVBAR
+===================================================================== -->
+<nav class="navbar navbar-dark border-bottom border-secondary border-opacity-25 py-3">
+    <div class="container-fluid px-4">
+        <!-- Left Brand -->
+        <span class="navbar-brand d-flex align-items-center gap-2 fs-4 fw-bold text-white">
+            <i class="bi bi-shield-fill-check text-primary"></i>
+            AI Cyber Threat Detection System
+        </span>
+
+        <!-- Right Header Status Items -->
+        <div class="d-flex align-items-center gap-4">
+            <div class="text-center">
+                <small class="text-secondary d-block">Status</small>
+                <span class="badge bg-success online-badge">
+                    <span class="online-dot"></span> ONLINE
+                </span>
+            </div>
+
+            <div class="text-center">
+                <small class="text-secondary d-block">Model</small>
+                <span class="text-info fw-bold">Random Forest</span>
+            </div>
+
+            <div class="text-center">
+                <small class="text-secondary d-block">Time</small>
+                <span id="clock" class="text-warning fw-bold">--:--:--</span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content Container -->
+<div class="container mt-4 mb-5">
+
+    <!-- =====================================================================
+         2. MODEL METRIC CARDS (4 Equal Cards)
+    ===================================================================== -->
+    <div class="row g-4 mb-4">
+        <!-- Accuracy -->
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="card metric-card border-green h-100">
+                <div class="card-body text-center d-flex flex-column align-items-center justify-content-center py-3">
+                    <div class="icon-circle bg-green"><i class="bi bi-crosshair"></i></div>
+                    <h6 class="metric-title mt-3 mb-1">Accuracy</h6>
+                    <div class="metric-value text-green-val" id="accuracy">99.1%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Precision -->
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="card metric-card border-blue h-100">
+                <div class="card-body text-center d-flex flex-column align-items-center justify-content-center py-3">
+                    <div class="icon-circle bg-blue"><i class="bi bi-check-lg"></i></div>
+                    <h6 class="metric-title mt-3 mb-1">Precision</h6>
+                    <div class="metric-value text-blue-val" id="precision">98.8%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recall -->
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="card metric-card border-orange h-100">
+                <div class="card-body text-center d-flex flex-column align-items-center justify-content-center py-3">
+                    <div class="icon-circle bg-orange"><i class="bi bi-arrow-repeat"></i></div>
+                    <h6 class="metric-title mt-3 mb-1">Recall</h6>
+                    <div class="metric-value text-green-val" id="recall">99.2%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- F1 Score -->
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="card metric-card border-purple h-100">
+                <div class="card-body text-center d-flex flex-column align-items-center justify-content-center py-3">
+                    <div class="icon-circle bg-purple"><i class="bi bi-trophy-fill"></i></div>
+                    <h6 class="metric-title mt-3 mb-1">F1 Score</h6>
+                    <div class="metric-value text-green-val" id="f1">99.0%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         3. PREDICT NETWORK TRAFFIC
+    ===================================================================== -->
+    <div class="card p-4 mb-4">
+        <div class="d-flex align-items-center justify-content-between mb-2">
+            <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-graph-up-arrow text-success fs-4"></i>
+                <h4 class="m-0 text-white fw-bold">Predict Network Traffic</h4>
+            </div>
+            <!-- Quick Preset Buttons for 1-click testing -->
+            <div class="d-flex flex-wrap gap-2">
+                <button class="btn btn-outline-success btn-sm btn-preset" onclick="loadPreset('normal')" type="button">
+                    <i class="bi bi-shield-check"></i> Normal
+                </button>
+                <button class="btn btn-outline-warning btn-sm btn-preset" onclick="loadPreset('dos')" type="button">
+                    <i class="bi bi-fire"></i> DoS
+                </button>
+                <button class="btn btn-outline-info btn-sm btn-preset" onclick="loadPreset('probe')" type="button">
+                    <i class="bi bi-search"></i> Probe
+                </button>
+                <button class="btn btn-outline-danger btn-sm btn-preset" onclick="loadPreset('r2l')" type="button">
+                    <i class="bi bi-key"></i> R2L
+                </button>
+            </div>
+        </div>
+        <p class="text-secondary mb-2">Enter comma separated features (41 values).</p>
+        
+        <textarea
+            id="features"
+            class="form-control"
+            rows="3"
+            placeholder="0, tcp, http, SF, 181, 5450, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 0.00, 0.00, 0.00, 0.00, 1.00, 0.00, 0.00, 9, 9, 1.00, 0.00, 0.11, 0.00, 0.00, 0.00, 0.00, 0.00"></textarea>
+
+        <button class="btn btn-green w-100 mt-3" id="predictBtn" onclick="predict()" type="button">
+            <i class="bi bi-bullseye me-2"></i> Predict
+        </button>
+
+        <div id="result" class="mt-3"></div>
+    </div>
+
+    <!-- =====================================================================
+         4. UPLOAD NSL-KDD DATASET & REPORT BUTTONS
+    ===================================================================== -->
+    <div class="card p-4 mb-4">
+        <div class="d-flex align-items-center gap-2 mb-2">
+            <i class="bi bi-folder-fill text-warning fs-4"></i>
+            <h4 class="m-0 text-white fw-bold">Upload NSL-KDD Dataset</h4>
+        </div>
+        <p class="text-secondary mb-3">Upload NSL-KDD dataset CSV file to analyze and predict threats.</p>
+
+        <input type="file" id="csvFile" class="form-control" accept=".csv, .txt">
+
+        <!-- Upload & Predict Button -->
+        <button class="btn btn-orange w-100 mt-3" id="uploadBtn" onclick="uploadCSV()" type="button">
+            <i class="bi bi-cloud-arrow-up me-2"></i> Upload & Predict
+        </button>
+
+        <!-- Download CSV Report Button -->
+        <button class="btn btn-primary w-100 mt-3" id="downloadCsvBtn" onclick="downloadReport()" type="button">
+            <i class="bi bi-download me-2"></i> Download CSV Report
+        </button>
+
+        <!-- Download PDF Report Button -->
+        <button class="btn btn-danger w-100 mt-2" id="downloadPdfBtn" onclick="downloadPDFReport()" type="button">
+            <i class="bi bi-file-earmark-pdf me-2"></i> Download PDF Report
+        </button>
+
+        <div id="uploadResult" class="mt-3"></div>
+
+        <!-- =================================================================
+             5. THREAT DISTRIBUTION
+        ================================================================== -->
+        <hr class="mt-4 mb-4">
+        <div class="d-flex align-items-center gap-2 mb-3">
+            <i class="bi bi-pie-chart-fill text-info fs-5"></i>
+            <h5 class="m-0 text-white fw-bold">Threat Distribution</h5>
+        </div>
+
+        <div class="chart-wrapper">
+            <canvas id="pieChart"></canvas>
+            <div id="chartPlaceholder" class="chart-empty-state">
+                <i class="bi bi-pie-chart text-secondary fs-1 mb-2"></i>
+                <p class="text-secondary small mb-0">Upload a dataset to visualize Safe vs. Threat traffic distribution</p>
+            </div>
+        </div>
+
+        <!-- =================================================================
+             6. LIVE ANALYTICS (4 Cards)
+        ================================================================== -->
+        <div class="row g-3 mt-3 mb-2">
+            <div class="col-6 col-md-3">
+                <div class="card analytics-card text-center p-3 h-100">
+                    <h6 class="text-secondary mb-2">Total Records</h6>
+                    <h2 class="text-white fw-bold m-0" id="liveTotal">0</h2>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card analytics-card text-center p-3 h-100">
+                    <h6 class="text-secondary mb-2">Safe Traffic</h6>
+                    <h2 class="text-white fw-bold m-0" id="liveSafe">0</h2>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card analytics-card text-center p-3 h-100">
+                    <h6 class="text-secondary mb-2">Threat Traffic</h6>
+                    <h2 class="text-white fw-bold m-0" id="liveThreat">0</h2>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card analytics-card text-center p-3 h-100">
+                    <h6 class="text-secondary mb-2">Threat Rate</h6>
+                    <h2 class="text-white fw-bold m-0" id="liveRate">0%</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- =================================================================
+             7. DETECTION HISTORY
+        ================================================================== -->
+        <hr class="mt-4 mb-4">
+        <div class="d-flex align-items-center gap-2 mb-3">
+            <i class="bi bi-clock text-info fs-5"></i>
+            <h5 class="m-0 text-white fw-bold">Detection History</h5>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-dark table-hover align-middle mb-0">
+                <thead>
+                    <tr class="text-secondary">
+                        <th style="width: 25%;">Time</th>
+                        <th style="width: 20%;">Total</th>
+                        <th style="width: 20%;">Safe</th>
+                        <th style="width: 20%;">Threat</th>
+                        <th style="width: 15%;">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="historyTable">
+                    <tr>
+                        <td colspan="5" class="text-center py-4 text-secondary">
+                            No analysis performed yet.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- =================================================================
+             8. AI THREAT ANALYSIS
+        ================================================================== -->
+        <hr class="mt-4 mb-4">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+            <div class="d-flex align-items-center gap-2">
+                <h5 class="m-0 text-white fw-bold">🤖 AI Threat Analysis</h5>
+            </div>
+            <span id="aiBadge" class="badge bg-secondary fs-8">AI Intelligence Active</span>
+        </div>
+
+        <div id="aiReport" class="ai-report-container p-3 rounded">
+            <p class="text-secondary mb-0">
+                Upload a dataset to generate an AI security report.
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Bootstrap 5 JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom SOC Controller Script (Loaded via Flask url_for) -->
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>

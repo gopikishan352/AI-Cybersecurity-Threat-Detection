@@ -1,0 +1,133 @@
+{
+    "model_type": "Random Forest Classifier (n_estimators=100)",
+    "training_dataset": "NSL-KDD (KDDTrain+.txt)",
+    "training_samples": 125973,
+    "validation_samples": 25195,
+    "num_features": 41,
+    "classes": [
+        "Normal",
+        "DoS",
+        "Probe",
+        "R2L",
+        "U2R"
+    ],
+    "validation": {
+        "accuracy": 99.88,
+        "precision": 99.88,
+        "recall": 99.88,
+        "f1_score": 99.88,
+        "confusion_matrix": [
+            [
+                13465,
+                2,
+                1,
+                0,
+                1
+            ],
+            [
+                1,
+                9185,
+                0,
+                0,
+                0
+            ],
+            [
+                15,
+                0,
+                2316,
+                0,
+                0
+            ],
+            [
+                8,
+                0,
+                0,
+                191,
+                0
+            ],
+            [
+                3,
+                0,
+                0,
+                0,
+                7
+            ]
+        ],
+        "per_class": {
+            "Normal": {
+                "precision": 99.8,
+                "recall": 99.97,
+                "f1_score": 99.89,
+                "support": 13469.0
+            },
+            "DoS": {
+                "precision": 99.98,
+                "recall": 99.99,
+                "f1_score": 99.98,
+                "support": 9186.0
+            },
+            "Probe": {
+                "precision": 99.96,
+                "recall": 99.36,
+                "f1_score": 99.66,
+                "support": 2331.0
+            },
+            "R2L": {
+                "precision": 100.0,
+                "recall": 95.98,
+                "f1_score": 97.95,
+                "support": 199.0
+            },
+            "U2R": {
+                "precision": 87.5,
+                "recall": 70.0,
+                "f1_score": 77.78,
+                "support": 10.0
+            }
+        }
+    },
+    "benchmark_test": {
+        "accuracy": 73.78,
+        "precision": 78.09,
+        "recall": 73.78,
+        "f1_score": 68.95,
+        "samples": 22544,
+        "confusion_matrix": [
+            [
+                9456,
+                67,
+                187,
+                0,
+                1
+            ],
+            [
+                1689,
+                5718,
+                51,
+                0,
+                0
+            ],
+            [
+                803,
+                165,
+                1453,
+                0,
+                0
+            ],
+            [
+                2875,
+                0,
+                8,
+                3,
+                1
+            ],
+            [
+                64,
+                0,
+                0,
+                1,
+                2
+            ]
+        ]
+    }
+}

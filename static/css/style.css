@@ -1,0 +1,382 @@
+/* =====================================================================
+   AI CYBER THREAT DETECTION SYSTEM - PROFESSIONAL SOC DARK THEME
+   Visual Match for Reference GitHub Cybersecurity Dashboard
+===================================================================== */
+
+:root {
+    --soc-bg: #0d1117;
+    --soc-card: #161b22;
+    --soc-border: #30363d;
+    --soc-text: #ffffff;
+    --soc-muted: #8b949e;
+    --soc-green: #00ff9d;
+    --soc-blue: #3b82f6;
+    --soc-orange: #f59e0b;
+    --soc-purple: #a855f7;
+    --soc-red: #ef4444;
+}
+
+/* Base Body Styles */
+body {
+    background-color: var(--soc-bg) !important;
+    color: var(--soc-text) !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* =====================================================================
+   NAVBAR
+===================================================================== */
+.navbar {
+    background-color: var(--soc-card) !important;
+    border-bottom: 1px solid var(--soc-border) !important;
+}
+
+.navbar-brand {
+    color: var(--soc-text) !important;
+    font-size: 1.35rem;
+    font-weight: 700;
+}
+
+.online-badge {
+    background-color: rgba(34, 197, 94, 0.2) !important;
+    color: #22c55e !important;
+    border: 1px solid rgba(34, 197, 94, 0.4);
+    font-size: 0.85rem;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.online-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #22c55e;
+    box-shadow: 0 0 8px #22c55e;
+}
+
+/* =====================================================================
+   CARDS & CONTAINERS
+===================================================================== */
+.card {
+    background-color: var(--soc-card) !important;
+    border: 1px solid var(--soc-border) !important;
+    border-radius: 8px !important;
+    color: var(--soc-text) !important;
+}
+
+.analytics-card {
+    background-color: #0d1117 !important;
+    border: 1px solid var(--soc-border) !important;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.analytics-card:hover {
+    border-color: #58a6ff !important;
+    transform: translateY(-2px);
+}
+
+/* =====================================================================
+   TOP 4 METRIC CARDS
+===================================================================== */
+.metric-card {
+    border-width: 2px !important;
+    border-style: solid !important;
+    border-radius: 8px !important;
+    background-color: var(--soc-card) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
+
+/* Colored Card Borders */
+.border-green { border-color: #00ff9d !important; }
+.border-blue { border-color: #3b82f6 !important; }
+.border-orange { border-color: #f59e0b !important; }
+.border-purple { border-color: #a855f7 !important; }
+
+/* Centered Circular Icons */
+.icon-circle {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.bg-green { background: rgba(0, 255, 157, 0.15); color: #00ff9d; }
+.bg-blue { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+.bg-orange { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+.bg-purple { background: rgba(168, 85, 247, 0.15); color: #a855f7; }
+
+.metric-title {
+    color: var(--soc-muted);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.metric-value {
+    font-weight: bold;
+    font-size: 2.2rem;
+    letter-spacing: -0.5px;
+}
+
+.text-green-val { color: #00ff9d !important; }
+.text-blue-val { color: #3b82f6 !important; }
+.text-orange-val { color: #f59e0b !important; }
+.text-purple-val { color: #a855f7 !important; }
+
+/* =====================================================================
+   BUTTONS
+===================================================================== */
+.btn-green {
+    background-color: #22c55e !important;
+    color: #ffffff !important;
+    border: none !important;
+    font-weight: 600 !important;
+    padding: 12px 0 !important;
+    border-radius: 6px !important;
+    font-size: 1rem !important;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-green:hover {
+    background-color: #16a34a !important;
+    color: #ffffff !important;
+}
+
+.btn-green:active {
+    transform: scale(0.99);
+}
+
+.btn-orange {
+    background-color: #f59e0b !important;
+    color: #ffffff !important;
+    border: none !important;
+    font-weight: 600 !important;
+    padding: 12px 0 !important;
+    border-radius: 6px !important;
+    font-size: 1rem !important;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-orange:hover {
+    background-color: #d97706 !important;
+    color: #ffffff !important;
+}
+
+.btn-orange:active {
+    transform: scale(0.99);
+}
+
+.btn-primary {
+    background-color: #1f6feb !important;
+    color: #ffffff !important;
+    border: none !important;
+    font-weight: 600 !important;
+    padding: 12px 20px !important;
+    border-radius: 6px !important;
+    font-size: 1rem !important;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #388bfd !important;
+    color: #ffffff !important;
+}
+
+.btn-danger {
+    background-color: #da3633 !important;
+    color: #ffffff !important;
+    border: none !important;
+    font-weight: 600 !important;
+    padding: 12px 20px !important;
+    border-radius: 6px !important;
+    font-size: 1rem !important;
+    transition: background-color 0.2s ease;
+}
+
+.btn-danger:hover {
+    background-color: #f85149 !important;
+    color: #ffffff !important;
+}
+
+/* Preset Buttons */
+.btn-preset {
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+/* =====================================================================
+   FORM CONTROLS & INPUTS
+===================================================================== */
+textarea,
+input[type="file"],
+.form-control,
+.form-select {
+    background-color: #0d1117 !important;
+    color: #ffffff !important;
+    border: 1px solid var(--soc-border) !important;
+    box-shadow: none !important;
+    border-radius: 6px !important;
+}
+
+textarea:focus,
+input[type="file"]:focus,
+.form-control:focus,
+.form-select:focus {
+    border-color: #58a6ff !important;
+    outline: none !important;
+}
+
+textarea::placeholder {
+    color: #484f58 !important;
+    font-size: 0.9rem;
+}
+
+input[type="file"]::file-selector-button {
+    background: #161b22;
+    color: #ffffff;
+    border: 1px solid var(--soc-border);
+    padding: 6px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 12px;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background: #21262d;
+    border-color: #8b949e;
+}
+
+hr {
+    border-color: var(--soc-border) !important;
+    opacity: 0.8 !important;
+}
+
+/* =====================================================================
+   CHART SECTION
+===================================================================== */
+.chart-wrapper {
+    position: relative;
+    max-width: 440px;
+    min-height: 280px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#pieChart {
+    width: 100% !important;
+    max-height: 320px !important;
+}
+
+.chart-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 220px;
+    width: 100%;
+    border: 1px dashed var(--soc-border);
+    border-radius: 8px;
+    background: rgba(13, 17, 23, 0.5);
+    text-align: center;
+    padding: 20px;
+}
+
+/* =====================================================================
+   TABLES
+===================================================================== */
+.table-dark {
+    --bs-table-bg: transparent !important;
+    --bs-table-striped-bg: rgba(255, 255, 255, 0.02) !important;
+    --bs-table-hover-bg: rgba(56, 189, 248, 0.06) !important;
+    color: #c9d1d9 !important;
+}
+
+.table-dark th {
+    color: var(--soc-muted) !important;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--soc-border) !important;
+    padding: 12px 14px;
+}
+
+.table-dark td {
+    border-bottom: 1px solid #21262d !important;
+    padding: 12px 14px;
+    font-size: 0.9rem;
+}
+
+/* =====================================================================
+   RESULT CARDS & AI REPORT
+===================================================================== */
+.dark-result-card {
+    background-color: #0d1117 !important;
+    border-radius: 6px;
+    padding: 18px;
+    border: 1px solid var(--soc-border);
+}
+
+.border-threat {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+}
+
+.border-safe {
+    border-color: #22c55e !important;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);
+}
+
+.ai-report-container {
+    background-color: #0d1117;
+    border: 1px solid var(--soc-border);
+    min-height: 80px;
+}
+
+.ai-report-content pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 0.9rem;
+    color: #e6edf3;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Threat and Risk Badges */
+.badge-dos { background-color: #f97316 !important; color: #fff !important; }
+.badge-probe { background-color: #3b82f6 !important; color: #fff !important; }
+.badge-r2l { background-color: #a855f7 !important; color: #fff !important; }
+.badge-u2r { background-color: #ef4444 !important; color: #fff !important; }
+.badge-normal { background-color: #22c55e !important; color: #fff !important; }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
+    .metric-value {
+        font-size: 1.7rem;
+    }
+    .chart-wrapper {
+        max-width: 100%;
+        min-height: 240px;
+    }
+}
